@@ -2,19 +2,25 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import Image from "next/image";
 import Link from "next/link";
 import BBSCardList from "./components/BBSCardList";
-import prisma from "../lib/prismaClient";
+// import prisma from "../lib/prismaClient";
+import { BBSData } from "./types/types";
 
-export default async function Home() {
+async function getBBSAllData() {
   const response = await fetch("http://localhost:3000/api/post", {
-    cache: "no-store",
+    cache: "no-store"
   });
 
-  const bbsAllData = await response.json();
-  console.log(bbsAllData);
+  const bbsAllData: BBSData[] = await response.json();
 
+  return bbsAllData;
+}
+
+export default async function Home() {
+  const bbsAllData = await getBBSAllData();
+  
   return (
     <main>
-      <BBSCardList />
+      <BBSCardList bbsAllData={bbsAllData}/>
     </main>
   );
 }
