@@ -23,4 +23,4 @@ export default async function Home() {
       <BBSCardList bbsAllData={bbsAllData}/>
     </main>
   );
-}
+};

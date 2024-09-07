@@ -7,6 +7,30 @@ export async function GET(req: Request) {
   return NextResponse.json(allBBSPosts);
 }
 
+export async function POST(req: Request) {
+  // リクエストボディからデータを取得
+  const { username, title, content } = await req.json();
+
+  // データベースの"Post"テーブルにデータを挿入
+  const { data, error } = await supabase
+      .from("Post")  // テーブル名を指定
+      .insert([
+          { username, title, content }  // 挿入するデータをオブジェクトとして指定
+      ]);
+
+  // エラーハンドリング
+  if (error) {
+      return NextResponse.json({ error: error.message }, { status: 400 });
+  }
+
+  // 挿入が成功した場合、挿入されたデータを返す
+  return NextResponse.json(data);
+}
+
+export const deletePost = async (id: number) => {
+  await supabase.from("Post").delete().eq("id", id);
+}
+
 // export async function GET(req: Request) {
 //   const allBBSPosts = await prisma.post.findMany();
 //   return NextResponse.json(allBBSPosts);

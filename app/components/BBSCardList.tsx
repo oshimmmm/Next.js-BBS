@@ -23,7 +23,7 @@ const BBSCardList = ({ bbsAllData }: BBSALLDataProps) => {
         <div className="grid lg:grid-cols-3 px-4 py-4 gap-4">
             {data.map((bbsData: BBSData) => (
                 <BBSCard key={bbsData.id } bbsData={bbsData}/>
-            ))};
+            ))}
         </div>
     );
 };

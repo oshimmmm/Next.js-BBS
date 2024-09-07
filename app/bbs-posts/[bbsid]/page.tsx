@@ -1,6 +1,7 @@
 import { supabase } from "@/lib/supabaseClient";
 import React from "react";
 import { BBSData } from "@/app/types/types";
+import Link from "next/link";
 
 const BBSDetailPage = async ({ params }: { params: { bbsid: string } }) => {
     const response = await fetch(`http://localhost:3000/api/post/${params.bbsid}`, {
@@ -16,9 +17,12 @@ const BBSDetailPage = async ({ params }: { params: { bbsid: string } }) => {
 
     return (
         <div>
-            <h1>{bbsDetailData.title}</h1>
-            <p>{bbsDetailData.content}</p>
-            {/* 他のデータを表示する */}
+            <div>
+                <h1>{bbsDetailData.title}</h1>
+                <p>{bbsDetailData.content}</p>
+                {/* 他のデータを表示する */}
+            </div>
+            <Link href={"/"} className="bg-blue-500 text-white font-bold py-2 px-4 rounded-md">戻る</Link>
         </div>
     );
 };
