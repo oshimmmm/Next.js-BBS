@@ -27,8 +27,16 @@ export async function POST(req: Request) {
   return NextResponse.json(data);
 }
 
-export const deletePost = async (id: number) => {
-  await supabase.from("Post").delete().eq("id", id);
+export async function DELETE(req: Request) {
+  const { id } = await req.json();
+
+  const { error } = await supabase.from("Post").delete().eq("id", id);
+
+  if (error) {
+    return NextResponse.json({ error: error.message }, { status: 400 });
+  }
+
+  return NextResponse.json({ message: "Post deleted successfully" });
 }
 
 // export async function GET(req: Request) {

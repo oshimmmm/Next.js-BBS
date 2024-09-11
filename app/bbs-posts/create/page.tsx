@@ -91,7 +91,7 @@ const CreateBBSPage = () => {
                         <FormItem>
                             <FormLabel>Content</FormLabel>
                             <FormControl>
-                            <Textarea placeholder='kontent' className='resize-none' {...field} />
+                            <Textarea placeholder='content' className='resize-none' {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>

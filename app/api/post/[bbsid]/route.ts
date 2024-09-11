@@ -8,7 +8,7 @@ export async function GET(
 ) {
     const bbsid = params.bbsid;
     const { data, error } = await supabase
-        .from<BBSData>("Post")
+        .from("Post")
         .select("*")
         .eq("id", parseInt(bbsid))
         .single(); // 単一のデータを取得する

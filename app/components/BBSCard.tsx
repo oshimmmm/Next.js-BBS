@@ -4,16 +4,43 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import Link from "next/link";
 import React from "react"
 import { BBSData } from "../types/types";
-import { deletePost } from "../api/post/route";
+import { useRouter } from "next/navigation";
 
 interface BBSDataProps {
     bbsData: BBSData;
 }
 
 const BBSCard = ({bbsData}: BBSDataProps) => {
+    const router = useRouter();
+
     const { id, title, content, createdAt, username } = bbsData;
     const handleDelete = async (id: number) => {
-        await deletePost(id);
+        try {
+            const res = await fetch(`/api/post`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ id }), // 削除したいIDを送信
+            });
+
+            if (!res.ok) {
+                const errorData = await res.json();
+                throw new Error(errorData.error || "削除に失敗しました");
+            }
+
+            alert("削除に成功しました");
+            // 必要であれば、削除後にリロードやデータの再取得を行う
+            router.push("/");
+            router.refresh();
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                alert(error.message);
+            } else {
+                alert("不明なエラーが発生しました");
+            }
+            console.error("削除中にエラーが発生しました:", error);
+        }
     };
 
     return (
