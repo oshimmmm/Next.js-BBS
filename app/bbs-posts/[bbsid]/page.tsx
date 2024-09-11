@@ -4,7 +4,7 @@ import { BBSData } from "@/app/types/types";
 import Link from "next/link";
 
 const BBSDetailPage = async ({ params }: { params: { bbsid: string } }) => {
-    const response = await fetch(`http://localhost:3000/api/post/${params.bbsid}`, {
+    const response = await fetch(`https://next-js-bbs.vercel.app/api/post/${params.bbsid}`, {
         cache: "no-store",
     });
 

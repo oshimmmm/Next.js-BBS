@@ -6,7 +6,7 @@ import BBSCardList from "./components/BBSCardList";
 import { BBSData } from "./types/types";
 
 async function getBBSAllData(): Promise<BBSData[]> {
-  const response = await fetch("http://localhost:3000/api/post", {
+  const response = await fetch("https://next-js-bbs.vercel.app/api/post", {
     cache: "no-store"
   });
 

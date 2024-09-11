@@ -24,7 +24,7 @@ export async function GET(
 
 
 async function getDetailBBSData(id: number) {
-    const response = await fetch(`http://localhost:3000/api/post/${id}`, {
+    const response = await fetch(`https://next-js-bbs.vercel.app/api/post/${id}`, {
         cache: "no-store",
     });
 
